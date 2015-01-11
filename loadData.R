@@ -5,5 +5,7 @@ getData <- function (dir = "..", file = "household_power_consumption.txt") {
     data <- wholeData[as.Date(wholeData$Date, format = "%d/%m/%Y") >= startDate & 
                           as.Date(wholeData$Date, format = "%d/%m/%Y") <= endDate, ]
     rm(wholeData, startDate, endDate)
+    data$Global_active_power <- as.numeric(as.character(data$Global_active_power))
+    data$timestampt <- strptime(paste(data$Date, data$Time), format = "%d/%m/%Y %H:%M:%S")
     data
 }
